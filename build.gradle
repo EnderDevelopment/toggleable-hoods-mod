@@ -1,0 +1,36 @@
+plugins {
+    id 'fabric-loom' version '1.1-SNAPSHOT'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+}
+
+ext.loom {
+    minecraftVersion = '1.20.4'
+    mappingsVersion = '1.20.4+build.1'
+    runDir = 'run'
+    accessWidener = 'src/main/resources/hoodsmod.accesswidener'
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.20.4'
+    mappings 'net.fabricmc:yarn:1.20.4+build.1:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.14.22'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.84.0+1.20.4'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    from 'src/main/resources'
+    include '*.json'
+    include '*.properties'
+    include '*.xml'
+    include '*.lang'
+    into 'build/resources/main'
+}
